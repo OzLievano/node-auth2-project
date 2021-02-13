@@ -5,7 +5,7 @@ const router =require('express').Router();
 const Users = require('../../api/users/users-model');
 const { isValid } = require('../users/users-service');
 
-router.get('/register', function registerUser(req,res){
+router.post('/register', function registerUser(req,res){
     const credentials = req.body;
 
     if(isValid(credentials)){
@@ -16,6 +16,7 @@ router.get('/register', function registerUser(req,res){
 
         Users.add(credentials)
         .then((user)=>{
+            console.log(user);
             res.status(201).json({data: user})
         })
         .catch((err)=>{
@@ -27,3 +28,6 @@ router.get('/register', function registerUser(req,res){
         })
     }
 })
+
+
+module.exports = router;

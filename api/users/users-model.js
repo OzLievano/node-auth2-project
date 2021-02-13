@@ -19,6 +19,7 @@ function findById(id){
     return db('users').where({ id });
 }
 
-function add(userData){
-    return db('users').insert(userData);
+async function add(userData){
+    let [id] = await db('users').insert(userData,"id");
+    return findById(id);
 }
